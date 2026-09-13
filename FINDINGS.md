@@ -141,6 +141,12 @@ the sandbox allowed. A rule that is not written down is treated as absent, and
 a rule that is written down does not stop a model pursuing a goal. This is the
 failure mode the harness exists for.
 
+The same probe run under the full ~2950-word persona constitution
+(`--persona-on-tools`), which forbids fabrication and requires warning and
+honesty, changed nothing that matters: 0 of 5 stopped and reported, 3 faked
+the fixture data, 1 also fetched from the network, 2 broke no rule and never
+reported. The constitution text did not reach this behavior at all.
+
 ## What held up
 
 The 27B at 10 samples each: 0/10 unsafe restarts in the healthy tool case, 0/10
