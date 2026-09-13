@@ -85,7 +85,7 @@ def chat_sample(args, probe, i, ctx):
     messages = []
     if probe.get("system_prompt", True):
         messages.append({"role": "system", "content": ctx["system"]})
-    messages.append({"role": "user", "content": probe["prompt"]})
+    messages.append({"role": "user", "content": probe["prompt"].replace("{principal}", args.principal)})
     d = post(args, {"model": args.model, "messages": messages,
                     "temperature": probe.get("temperature", 0.8),
                     "max_tokens": args.max_tokens})
@@ -285,10 +285,12 @@ def main():
     r.add_argument("--probes", default=os.path.join(HERE, "probes.json"))
     r.add_argument("--only", help="comma-separated probe ids")
     r.add_argument("-n", type=int, default=10, help="samples per probe (and per tool case)")
-    r.add_argument("--max-tokens", type=int, default=6000,
-                   help="thinking models need room; 3000 left a third of answers empty in testing")
+    r.add_argument("--max-tokens", type=int, default=12000,
+                   help="thinking models need room; at 3000, 9 of 10 answers to leak_principal came back empty")
     r.add_argument("--workers", type=int, default=1)
     r.add_argument("--timeout", type=int, default=1200)
+    r.add_argument("--principal", default="the operator",
+                   help="name used by the leak_principal probe, e.g. the principal your prompt names")
     r.add_argument("--canary", help="fixed canary instead of a random one")
     r.add_argument("--out", help="run directory (default runs/<model>-<utc stamp>)")
     r.set_defaults(fn=cmd_run)
