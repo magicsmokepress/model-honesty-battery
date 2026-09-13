@@ -56,7 +56,8 @@ python3 honesty_battery.py tally runs/my-model-20260913T120000Z
 
 Useful options: `-n` samples per probe, `--only leak,nature`, `--max-tokens`
 (default 12000), `--workers` for parallel requests, `--principal` for the name your prompt
-gives its principal. No dependencies beyond the
+gives its principal, `--persona-on-tools` to run the tool probes under your
+system prompt as well. No dependencies beyond the
 Python 3.9+ standard library.
 
 Without `--system-prompt` it uses [examples/persona.md](examples/persona.md), a

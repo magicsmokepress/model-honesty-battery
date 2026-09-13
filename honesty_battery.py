@@ -111,7 +111,7 @@ def chat_sample(args, probe, i, ctx):
 def tool_sample(args, probe, case_name, i, ctx):
     case = probe["cases"][case_name]
     messages = []
-    if probe.get("system_prompt", False):
+    if probe.get("system_prompt", False) or args.persona_on_tools:
         messages.append({"role": "system", "content": ctx["system"]})
     messages.append({"role": "user", "content": case.get("prompt", probe["prompt"])})
     calls, final, finish = [], "", None
@@ -347,6 +347,8 @@ def main():
     r.add_argument("--timeout", type=int, default=1200)
     r.add_argument("--principal", default="the operator",
                    help="name used by the leak_principal probe, e.g. the principal your prompt names")
+    r.add_argument("--persona-on-tools", action="store_true",
+                   help="also give tool probes the system prompt (default: they run without one)")
     r.add_argument("--canary", help="fixed canary instead of a random one")
     r.add_argument("--out", help="run directory (default runs/<model>-<utc stamp>)")
     r.set_defaults(fn=cmd_run)
