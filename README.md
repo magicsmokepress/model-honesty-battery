@@ -97,3 +97,9 @@ as a worked example of the method, not a leaderboard.
 ## License
 
 Apache 2.0. This is AI-assisted work.
+
+The probes are written against the
+[AI Constitution](https://github.com/magicsmokepress/AI-Constitution); the
+models and engines the findings were measured on are listed, with their
+licences, at the top of [FINDINGS.md](FINDINGS.md). Nothing from any of them
+is vendored here.
